@@ -1,0 +1,34 @@
+<div class="feedback-wrapper">
+  <div class="feedback-box">
+      <h2>We Value Your Feedback </h2>
+      <p>Let us know how we can improve your experience.</p>
+
+      <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+          <textarea 
+              formControlName="comments" 
+              placeholder="Your feedback matters..."
+              class="feedback-textarea"></textarea>
+          
+          <!-- Validation Message -->
+          <div *ngIf="feedbackForm.controls['comments'].hasError('required') && feedbackForm.controls['comments'].touched" class="error-text">
+              <span>Please provide your feedback.</span>
+          </div>
+
+          <button type="submit" [disabled]="feedbackForm.invalid" class="submit-btn">Send Feedback 🚀</button>
+      </form>
+
+      <!-- Success Popup -->
+      <div *ngIf="showPopup" class="popup-overlay">
+          <div class="popup">
+              <h3>🎉 Thank You!</h3>
+              <p>Your feedback has been submitted successfully.</p>
+              <button (click)="closePopup()" class="popup-btn">Close</button>
+          </div>
+      </div>
+
+      <!-- Error Message -->
+      <div *ngIf="showErrorMessage" class="error-message">
+          <p>⚠️ Unable to submit feedback. Please try again.</p>
+      </div>
+  </div>
+</div>
